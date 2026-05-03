@@ -1,0 +1,1 @@
+All you need to do is install the Arduino IDE on your RPi and have them talk over serial. (Describe steps eventually)
