@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "leJOS: Build and Upload",
+            "type": "shell",
+            "command": "cd '${fileDirname}'; nxjc '${fileBasename}'; if ($?) { nxj -u -r ${fileBasenameNoExtension} }",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$javac"]
+        }
+    ]
+}
+//Ctrl+Shift+B
