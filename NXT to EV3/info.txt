@@ -1,0 +1,21 @@
+To make your communication system robust for any project, follow these "Golden Rules":Header Tags: 
+
+Start your strings with a tag like MOT: for motor commands or SEN: for sensor data.
+
+The Flush: Always use dos.flush() in Java. Without it, the NXT will "hold" the data in a buffer and the EV3 will never receive it.
+
+Case Sensitivity: Use .upper() in Python and .toUpperCase() in Java so commands like "Stop" and "STOP" are treated the same.
+
+The "Handshake": Have the NXT send a small string (like "READY") as soon as it connects. This tells your EV3 that the Java program is actually running and not just the brick firmware.
+
+The readUTF() command: This is the "magic" command for strings in leJOS. It automatically handles the length-prefixing that Pybricks uses.
+
+Avoid readInt(): Never use readInt() if the EV3 is sending a TextMailbox. That is the #1 cause of NXT reboots.
+
+Start the NXT first: Always have the NXT sitting in its "Waiting..." state before you hit F5 on the EV3.
+
+
+
+1. The "Safety Stop" (EV3 & NXT)Add a command to stop the motors so your robot doesn't drive off a table.EV3: mbox.send("STOP")NXT: Add else if (raw.indexOf("STOP") != -1) { Motor.A.stop(); }
+2. The Confirmations (NXT → EV3)Have the NXT send a message back to the EV3 once the motor starts. This is how you build a reliable "network."NXT: dos.writeUTF("STARTED"); dos.flush();
+3. Speed ControlInstead of just "FORWARD," try sending a number.EV3: mbox.send("SPD:75")NXT: Use raw.substring() to grab the "75" and Integer.parseInt() to set the motor speed.
